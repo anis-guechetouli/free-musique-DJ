@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.py">
+  <title>Téléchargeur Audio YouTube</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Vidéos YouTube trouvées</h1>
+  <ul id="video-list">
+    <!-- La liste des vidéos sera injectée ici -->
+  </ul>
+
+  <script>
+    // Fonction pour remplir la liste de vidéos
+    function populateVideoList(videos) {
+      const videoList = document.getElementById('video-list');
+      videoList.innerHTML = ''; // Clear the current list
+      videos.forEach(video => {
+        let listItem = document.createElement('li');
+        listItem.textContent = video.title;
+        videoList.appendChild(listItem);
+      });
+    }
+    
+    // Recevoir les données depuis le Python via `js_api`
+    const videos = JSON.parse(window.pywebview.api);
+    populateVideoList(videos);
+  </script>
+</body>
+</html>
